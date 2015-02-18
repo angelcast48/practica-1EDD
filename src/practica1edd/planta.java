@@ -1,6 +1,13 @@
 package practica1edd;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 public class planta {
-    String p;
-    int a;
-    int b;
+    JButton Eliminar;
+    JButton Modificar;
+    JLabel imagen;
+    
+    
 }
+
