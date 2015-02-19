@@ -4,7 +4,16 @@
  */
 package practica1edd;
 
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -12,9 +21,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Plantas extends javax.swing.JFrame {
 DefaultTableModel md;
+Object data[][]={};
+String cabecera[]={"Imagen","Nombre","Ataque","Defensa","Tipo","",""};
     public Plantas() {
         initComponents();
-        md=new DefaultTableModel();
+        md=new DefaultTableModel(data,cabecera);
+        jTablePlantas.setModel(md);
+        
         
     }
 
@@ -27,15 +40,15 @@ DefaultTableModel md;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        label1 = new javax.swing.JLabel();
         BotonAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePlantas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GatlingPea.png"))); // NOI18N
+        label1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GatlingPea.png"))); // NOI18N
 
         BotonAgregar.setText("Agregar");
         BotonAgregar.setName("Agregar"); // NOI18N
@@ -45,7 +58,7 @@ DefaultTableModel md;
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePlantas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -56,17 +69,17 @@ DefaultTableModel md;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTablePlantas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(BotonAgregar)
                 .addContainerGap())
         );
@@ -77,16 +90,122 @@ DefaultTableModel md;
                 .addComponent(BotonAgregar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addComponent(label1)
                 .addGap(0, 4, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
+String nombre="planta";
+String imagen="C:\\Users\\Ange\\Documents\\NetBeansProjects\\Practica1EDD\\src\\imagenes\\check-icon (1).png";
+int ataque=100;
+int defensa=200;
+String tipo="disparo";
+planta p=new planta();
+p.setNombre(nombre);
+p.setImagen(imagen);
+p.setAtaque(ataque);
+p.setDefensa(defensa);
+p.setTipo(tipo);
+jTablePlantas.setRowHeight(200);
+final Class[] tiposColumnas = new Class[]{
+            JLabel.class,
+            java.lang.String.class,
+            java.lang.Integer.class,
+            java.lang.Integer.class,
+            java.lang.String.class,
+            JButton.class,
+            JButton.class
+        // <- noten que aquí se especifica que la última columna es un botón
+        };
+ Object[][] datos = new Object[][]{
+            {p.getImagen(),p.getNombre(),p.getAtaque(),p.getDefensa(),p.getTipo(),p.getModificar(),p.getEliminar()}
+        };
+ 
+
+
+ jTablePlantas.setModel(new javax.swing.table.DefaultTableModel(
+                datos,
+                cabecera) {
+            // Esta variable nos permite conocer de antemano los tipos de datos de cada columna, dentro del TableModel
+            Class[] tipos = tiposColumnas;
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                // Este método es invocado por el CellRenderer para saber que dibujar en la celda,
+                // observen que estamos retornando la clase que definimos de antemano.
+                return tipos[columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Sobrescribimos este método para evitar que la columna que contiene los botones sea editada.
+                return !(this.getColumnClass(column).equals(JButton.class));
+            }
+        });
+
+        // El objetivo de la siguiente línea es indicar el CellRenderer que será utilizado para dibujar el botón
+        jTablePlantas.setDefaultRenderer(JButton.class, new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object objeto, boolean estaSeleccionado, boolean tieneElFoco, int fila, int columna) {
+                /**
+                 * Observen que todo lo que hacemos en éste método es retornar el objeto que se va a dibujar en la 
+                 * celda. Esto significa que se dibujará en la celda el objeto que devuelva el TableModel. También 
+                 * significa que este renderer nos permitiría dibujar cualquier objeto gráfico en la grilla, pues 
+                 * retorna el objeto tal y como lo recibe.
+                 */
+                return (Component) objeto;
+            }
+        });
+          jTablePlantas.setDefaultRenderer(JLabel.class, new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object objeto, boolean estaSeleccionado, boolean tieneElFoco, int fila, int columna) {
+
+                return (Component) objeto;
+            }
+        });
+
+        /**
+         * Por último, agregamos un listener que nos permita saber cuando fue pulsada la celda que contiene el botón.
+         * Noten que estamos capturando el clic sobre JTable, no el clic sobre el JButton. Esto también implica que en 
+         * lugar de poner un botón en la celda, simplemente pudimos definir un CellRenderer que hiciera parecer que la 
+         * celda contiene un botón. Es posible capturar el clic del botón, pero a mi parecer el efecto es el mismo y 
+         * hacerlo de esta forma es más "simple"
+         */
+        jTablePlantas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = jTablePlantas.rowAtPoint(e.getPoint());
+                int columna = jTablePlantas.columnAtPoint(e.getPoint());
+
+                /**
+                 * Preguntamos si hicimos clic sobre la celda que contiene el botón, si tuviéramos más de un botón 
+                 * por fila tendríamos que además preguntar por el contenido del botón o el nombre de la columna
+                 */
+                if (jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)) {
+                    /**
+                     * Aquí pueden poner lo que quieran, para efectos de este ejemplo, voy a mostrar
+                     * en un cuadro de dialogo todos los campos de la fila que no sean un botón.
+                     */
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < jTablePlantas.getModel().getColumnCount(); i++) {
+                        if (!jTablePlantas.getModel().getColumnClass(i).equals(JButton.class)) {
+                            sb.append("\n").append(jTablePlantas.getModel().getColumnName(i)).append(": ").append(jTablePlantas.getModel().getValueAt(fila, i));
+                        }
+                    }
+                    JOptionPane.showMessageDialog(null, "Seleccionada la fila " + fila + sb.toString());
+                }
+            }
+        });
+        
+
+
+
 
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonAgregarActionPerformed
@@ -127,8 +246,8 @@ DefaultTableModel md;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAgregar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablePlantas;
+    private javax.swing.JLabel label1;
     // End of variables declaration//GEN-END:variables
 }
