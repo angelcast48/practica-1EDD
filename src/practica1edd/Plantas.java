@@ -23,11 +23,13 @@ public class Plantas extends javax.swing.JFrame {
 DefaultTableModel md;
 Object data[][]={};
 String cabecera[]={"Imagen","Nombre","Ataque","Defensa","Tipo","",""};
+Object[][] datos;
     public Plantas() {
         initComponents();
         md=new DefaultTableModel(data,cabecera);
         jTablePlantas.setModel(md);
-        
+        jTablePlantas.setRowHeight(200);
+        datos = new Object[][]{};
         
     }
 
@@ -101,6 +103,14 @@ String cabecera[]={"Imagen","Nombre","Ataque","Defensa","Tipo","",""};
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
+
+
+agregarPlanta();
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonAgregarActionPerformed
+public void agregarPlanta(){
 String nombre="planta";
 String imagen="C:\\Users\\Ange\\Documents\\NetBeansProjects\\Practica1EDD\\src\\imagenes\\check-icon (1).png";
 int ataque=100;
@@ -112,7 +122,7 @@ p.setImagen(imagen);
 p.setAtaque(ataque);
 p.setDefensa(defensa);
 p.setTipo(tipo);
-jTablePlantas.setRowHeight(200);
+
 final Class[] tiposColumnas = new Class[]{
             JLabel.class,
             java.lang.String.class,
@@ -123,10 +133,12 @@ final Class[] tiposColumnas = new Class[]{
             JButton.class
         // <- noten que aquí se especifica que la última columna es un botón
         };
- Object[][] datos = new Object[][]{
+// Object[][] datos = new Object[][]{
+//            {p.getImagen(),p.getNombre(),p.getAtaque(),p.getDefensa(),p.getTipo(),p.getModificar(),p.getEliminar()}
+//        };
+  datos = new Object[][]{
             {p.getImagen(),p.getNombre(),p.getAtaque(),p.getDefensa(),p.getTipo(),p.getModificar(),p.getEliminar()}
         };
- 
 
 
  jTablePlantas.setModel(new javax.swing.table.DefaultTableModel(
@@ -148,6 +160,7 @@ final Class[] tiposColumnas = new Class[]{
                 return !(this.getColumnClass(column).equals(JButton.class));
             }
         });
+
 
         // El objetivo de la siguiente línea es indicar el CellRenderer que será utilizado para dibujar el botón
         jTablePlantas.setDefaultRenderer(JButton.class, new TableCellRenderer() {
@@ -203,13 +216,7 @@ final Class[] tiposColumnas = new Class[]{
             }
         });
         
-
-
-
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BotonAgregarActionPerformed
-
+}
     /**
      * @param args the command line arguments
      */
