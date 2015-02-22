@@ -27,7 +27,7 @@ public class Lista implements Serializable {
         }
     }
 
-    public int tamanioDeLaLista() {
+    public int ContadorLista() {
         Nodo nodo = primerNodo;
         int tamanioLista = 0;
         while (nodo != null) {
@@ -38,21 +38,28 @@ public class Lista implements Serializable {
     }
 public void eliminarPlanta(String nombre){
 Nodo nodo=primerNodo;
-Nodo aux=nodo.siguienteNodo;
-planta buscada=null;
-planta planta;
+planta planta=(planta)nodo.datos;
 if(!listaVacia()){
-while(nodo!=null){
-    planta=(planta)nodo.datos;
-    if(nombre.equalsIgnoreCase(planta.getNombre())){
-        buscada=planta;
-        break;
-    }
-    nodo=nodo.siguienteNodo;
+if(nombre.equalsIgnoreCase(planta.getNombre())){
+    primerNodo=primerNodo.getSiguienteNodo();
+}
+    else{
+                Nodo anterior = primerNodo; 
+                Nodo auxiliar;
+                auxiliar = primerNodo.getSiguienteNodo();
+                planta aux=(planta)auxiliar.datos;
+                while (auxiliar != null) {
+                    if (nombre.equalsIgnoreCase(aux.getNombre())) {
+                        anterior.setSiguienteNodo(auxiliar.getSiguienteNodo());
+                        auxiliar = null;
+                        
+                    }
+                    anterior = auxiliar;
+                    auxiliar = auxiliar.getSiguienteNodo();
+                }
 }
 }
 }
-
 //    public Equipo buscarEquipo(String nombre) {
 //        Nodo nodo = primerNodo;
 //        Equipo equipoBuscado = null;
@@ -151,6 +158,21 @@ while(nodo!=null){
 
     boolean listaVacia() {
         return primerNodo == null;
+    }
+    public Nodo GetNodo(int i){
+        Nodo nodo=null;
+        int contador=0;
+        if(i==0){
+            nodo= primerNodo;
+        }
+        else if(i<ContadorLista()){
+            nodo=primerNodo;
+            while(contador!=i){
+                nodo=nodo.getSiguienteNodo();
+                contador++;
+            }
+        }
+    return nodo ;   
     }
 }
 

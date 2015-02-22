@@ -29,4 +29,7 @@ public class Nodo implements Serializable {
     public Object getDatos() {
         return datos;
     }
+    public void setSiguienteNodo(Nodo nodo){
+        this.siguienteNodo = siguienteNodo;
+    }
 }
