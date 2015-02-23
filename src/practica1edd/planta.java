@@ -1,5 +1,6 @@
 package practica1edd;
 
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,23 +17,32 @@ public class planta {
 public planta() {
     Eliminar=new JButton();
     Modificar=new JButton();
+    Eliminar.setSize(50,50);
+    Modificar.setSize(50,50);
     imagen=new JLabel();
     Eliminar.setText("Eliminar");
     Modificar.setText("Modificar");
+    
         
     }
 public void setImagen(String img){
-        imagen.setIcon(new ImageIcon(img));
+        ImageIcon foto = new ImageIcon(img);
+        imagen.setSize(100,100);
+         ImageIcon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.getWidth(),imagen.getHeight(), Image.SCALE_DEFAULT));
+         imagen.setIcon(icono);  
+         imagen.setIcon(icono);
 }
     public String getNombre() {
         return nombre;
     }
+    
 
     /**
      * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+       
     }
 
     /**

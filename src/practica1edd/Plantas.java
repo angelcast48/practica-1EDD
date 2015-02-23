@@ -33,7 +33,7 @@ String info="";
         initComponents();
         md=new DefaultTableModel(data,cabecera);
         jTablePlantas.setModel(md);
-        jTablePlantas.setRowHeight(200);
+        jTablePlantas.setRowHeight(100);
       
         
     }
@@ -52,7 +52,6 @@ String info="";
         jLabel4 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtDefensa = new javax.swing.JTextField();
-        txtTipo = new javax.swing.JTextField();
         BtnBuscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -62,6 +61,7 @@ String info="";
         jLabel3 = new javax.swing.JLabel();
         txtAtaque = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        comboTipo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 51));
@@ -124,6 +124,8 @@ String info="";
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Planta");
 
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disparo", "Directo" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,21 +150,22 @@ String info="";
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(21, 21, 21))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(66, 66, 66)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(9, 9, 9))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(21, 21, 21)))
-                                .addComponent(BtnBuscar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtDefensa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(txtTipo, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtAtaque, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                        .addGap(9, 9, 9)))
+                                .addComponent(BtnBuscar)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDefensa, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 135, Short.MAX_VALUE)
+                                    .addComponent(txtAtaque, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(jLabel6))))
@@ -195,8 +198,8 @@ String info="";
                                     .addComponent(jLabel4))
                                 .addGap(11, 11, 11)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel5)
+                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(BtnBuscar))))
@@ -218,7 +221,7 @@ String info="";
         String nombre=txtNombre.getText();
         int ataque= Integer.parseInt(txtAtaque.getText());
         int defensa= Integer.parseInt(txtDefensa.getText());
-        String tipo=txtTipo.getText();
+        String tipo=comboTipo.getSelectedItem().toString();
         
         agregar(imagen, nombre, ataque, defensa, tipo);
 
@@ -310,31 +313,31 @@ Object datos[][]= agregarInfo();
          * celda contiene un botón. Es posible capturar el clic del botón, pero a mi parecer el efecto es el mismo y 
          * hacerlo de esta forma es más "simple"
          */
-        jTablePlantas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila = jTablePlantas.rowAtPoint(e.getPoint());
-                int columna = jTablePlantas.columnAtPoint(e.getPoint());
-
-                /**
-                 * Preguntamos si hicimos clic sobre la celda que contiene el botón, si tuviéramos más de un botón 
-                 * por fila tendríamos que además preguntar por el contenido del botón o el nombre de la columna
-                 */
-                if (jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)) {
-                    /**
-                     * Aquí pueden poner lo que quieran, para efectos de este ejemplo, voy a mostrar
-                     * en un cuadro de dialogo todos los campos de la fila que no sean un botón.
-                     */
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < jTablePlantas.getModel().getColumnCount(); i++) {
-                        if (!jTablePlantas.getModel().getColumnClass(i).equals(JButton.class)) {
-                            sb.append("\n").append(jTablePlantas.getModel().getColumnName(i)).append(": ").append(jTablePlantas.getModel().getValueAt(fila, i));
-                        }
-                    }
-                    JOptionPane.showMessageDialog(null, "Seleccionada la fila " + fila + sb.toString());
-                }
-            }
-        });
+//        jTablePlantas.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                int fila = jTablePlantas.rowAtPoint(e.getPoint());
+//                int columna = jTablePlantas.columnAtPoint(e.getPoint());
+//
+//                /**
+//                 * Preguntamos si hicimos clic sobre la celda que contiene el botón, si tuviéramos más de un botón 
+//                 * por fila tendríamos que además preguntar por el contenido del botón o el nombre de la columna
+//                 */
+//                if (jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)) {
+//                    /**
+//                     * Aquí pueden poner lo que quieran, para efectos de este ejemplo, voy a mostrar
+//                     * en un cuadro de dialogo todos los campos de la fila que no sean un botón.
+//                     */
+//                    StringBuilder sb = new StringBuilder();
+//                    for (int i = 0; i < jTablePlantas.getModel().getColumnCount(); i++) {
+//                        if (!jTablePlantas.getModel().getColumnClass(i).equals(JButton.class)) {
+//                            sb.append("\n").append(jTablePlantas.getModel().getColumnName(i)).append(": ").append(jTablePlantas.getModel().getValueAt(fila, i));
+//                        }
+//                    }
+//                    JOptionPane.showMessageDialog(null, "Seleccionada la fila " + fila + sb.toString());
+//                }
+//            }
+//        });
         
 }
 public Object[][] agregarInfo(){
@@ -400,6 +403,7 @@ public void agregar(String imagen,String nombre,int ataque,int defensa,String ti
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
+    private javax.swing.JComboBox comboTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -413,6 +417,5 @@ public void agregar(String imagen,String nombre,int ataque,int defensa,String ti
     private javax.swing.JTextField txtDefensa;
     private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 }

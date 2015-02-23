@@ -96,6 +96,7 @@ public class Inicio extends img {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 Jugadores p=new Jugadores();
+this.dispose();
 p.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
