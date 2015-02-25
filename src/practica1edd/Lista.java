@@ -47,15 +47,40 @@ if(nombre.equalsIgnoreCase(planta.getNombre())){
                 Nodo anterior = primerNodo; 
                 Nodo auxiliar;
                 auxiliar = primerNodo.getSiguienteNodo();
-                planta aux=(planta)auxiliar.datos;
+                if(auxiliar!=ultimoNodo){
                 while (auxiliar != null) {
+                    planta aux=(planta)auxiliar.datos;
                     if (nombre.equalsIgnoreCase(aux.getNombre())) {
-                        anterior.setSiguienteNodo(auxiliar.getSiguienteNodo());
-                        auxiliar = null;
+                        if(auxiliar!=null){
+                            anterior.setSiguienteNodo(auxiliar.getSiguienteNodo());
+                            auxiliar = null;
+                            break;
+                        }
+                        else{
+                            anterior.setSiguienteNodo(auxiliar.getSiguienteNodo());
+                            ultimoNodo=anterior;
+                            auxiliar = null;
+                            break;
+                        }
                         
                     }
                     anterior = auxiliar;
                     auxiliar = auxiliar.getSiguienteNodo();
+                }
+                }
+                else{
+                    while (auxiliar != null) {
+                    planta aux=(planta)auxiliar.datos;
+                    if (nombre.equalsIgnoreCase(aux.getNombre())) {
+                        primerNodo.setSiguienteNodo(auxiliar.getSiguienteNodo());
+                        auxiliar = null;
+                        ultimoNodo=primerNodo;
+                        break;
+                    }
+                    anterior = auxiliar;
+                    auxiliar = auxiliar.getSiguienteNodo();
+                }
+
                 }
 }
 }
@@ -140,21 +165,21 @@ if(nombre.equalsIgnoreCase(planta.getNombre())){
 //        return jugadorBuscado;
 //    }
 //
-//    public Jugador buscarJugador(int carnet) {
-//        Nodo nodo = primerNodo;
-//        Jugador jugadorBuscado = null;
-//        Jugador jugador;
-//        while (nodo != null) {
-//            jugador = (Jugador) nodo.datos;
-//            if (carnet == jugador.getNoCarnet()) {
-//                jugadorBuscado = jugador;
-//                break;
-//            }
-//            nodo = nodo.siguienteNodo;
-//        }
-//
-//        return jugadorBuscado;
-//    }
+    public planta buscarPlanta(String nombre) {
+        Nodo nodo = primerNodo;
+        planta PlantaBuscada = null;
+        planta planta;
+        while (nodo != null) {
+            planta = (planta) nodo.datos;
+            if (planta.getNombre().equals(nombre)) {
+                 PlantaBuscada= planta;
+                break;
+            }
+            nodo = nodo.siguienteNodo;
+        }
+
+        return PlantaBuscada;
+    }
 
     boolean listaVacia() {
         return primerNodo == null;

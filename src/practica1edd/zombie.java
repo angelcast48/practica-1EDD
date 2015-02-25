@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class planta {
+public class zombie {
     private JButton Eliminar;
     private JButton Modificar;
     
@@ -14,22 +14,19 @@ public class planta {
     private int ataque;
     private int defensa;
     private String tipo;
-    private String Ruta;
-public planta() {
+public zombie() {
     Eliminar=new JButton();
     Modificar=new JButton();
-    Eliminar.setSize(30,30);
-    Modificar.setSize(30,30);
+    Eliminar.setSize(50,50);
+    Modificar.setSize(50,50);
     imagen=new JLabel();
     Eliminar.setText("Eliminar");
     Modificar.setText("Modificar");
-        
-    }
-
+}
+    
 public void setImagen(String img){
         ImageIcon foto = new ImageIcon(img);
         imagen.setSize(100,100);
-        setRuta(img);
          ImageIcon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.getWidth(),imagen.getHeight(), Image.SCALE_DEFAULT));
          imagen.setIcon(icono);  
          imagen.setIcon(icono);
@@ -109,22 +106,4 @@ public void setImagen(String img){
     public JLabel getImagen() {
         return imagen;
     }
-
-    /**
-     * @return the Ruta
-     */
-    public String getRuta() {
-        return Ruta;
-    }
-
-    /**
-     * @param Ruta the Ruta to set
-     */
-    public void setRuta(String Ruta) {
-        this.Ruta = Ruta;
-    }
-    
-    
-    
 }
-
