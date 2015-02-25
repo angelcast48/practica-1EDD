@@ -32,7 +32,6 @@ public void setImagen(String img){
         setRuta(img);
          ImageIcon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.getWidth(),imagen.getHeight(), Image.SCALE_DEFAULT));
          imagen.setIcon(icono);  
-         imagen.setIcon(icono);
 }
     public String getNombre() {
         return nombre;

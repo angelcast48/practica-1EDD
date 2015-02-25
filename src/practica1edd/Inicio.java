@@ -11,14 +11,23 @@ import imagenes.img;
  * @author Ange
  */
 public class Inicio extends img {
-
+static public String TipoJugador="";
+static public String auxTipo="";
     /**
      * Creates new form Inicio
      */
     public Inicio() {
         initComponents();
     }
-
+public String getJugador(){
+return TipoJugador;
+}
+public String getAux(){
+    return auxTipo;
+}
+public void setJugador(String tipo){
+    TipoJugador=tipo;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,13 +105,19 @@ public class Inicio extends img {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 Jugadores p=new Jugadores();
+TipoJugador="plantas";
+auxTipo="plantas";
 this.dispose();
 p.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-
+Jugadores p=new Jugadores();
+TipoJugador="zombies";
+auxTipo="zombies";
+this.dispose();
+p.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseClicked
 

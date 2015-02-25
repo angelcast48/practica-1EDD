@@ -4,18 +4,43 @@
  */
 package practica1edd;
 
+import imagenes.img;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import static practica1edd.Plantas.Nmod;
+
 /**
  *
  * @author Ange
  */
-public class catalogoZombies extends javax.swing.JFrame {
+public class catalogoZombies extends img {
+Lista ListaZombies=new Lista();
+DefaultTableModel md;
+Object data[][]={};
+static int Nmod;//numero de zombie a modificar
+String cabecera[]={"Imagen","Nombre","Ataque","Defensa","Tipo","Eliminar","Modificar"};
+int contador=0;
+String info="";
 
-    /**
-     * Creates new form catalogoZombies
-     */
     public catalogoZombies() {
         initComponents();
+        md=new DefaultTableModel(data,cabecera);
+        jTablePlantas.setModel(md);
+        jTablePlantas.setRowHeight(100);
+        lbSiguiente.setSize(30, 30);
+        btnModificar.setVisible(false);
     }
+public void EliminarZombie(String nombre){
+ListaZombies.eliminarZombie(nombre);
+Mostrar();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +51,358 @@ public class catalogoZombies extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbSiguiente = new javax.swing.JLabel();
+        btnModificar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        comboTipo = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        txtAtaque = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtImagen = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTablePlantas = new javax.swing.JTable();
+        btnAgregar = new javax.swing.JButton();
+        BtnBuscar = new javax.swing.JButton();
+        txtDefensa = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        lbSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
+        lbSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbSiguienteMouseClicked(evt);
+            }
+        });
+
+        btnModificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel6.setText("Zombie");
+
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disparo", "Directo" }));
+
+        jLabel3.setFont(new java.awt.Font("Century", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Ataque:");
+
+        jLabel1.setFont(new java.awt.Font("Century", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Imagen:");
+
+        jTablePlantas.setBackground(new java.awt.Color(255, 204, 0));
+        jTablePlantas.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jTablePlantas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTablePlantas);
+
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        BtnBuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BtnBuscar.setText("Buscar");
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Century", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Defensa:");
+
+        jLabel2.setFont(new java.awt.Font("Century", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Nombre:");
+
+        jLabel5.setFont(new java.awt.Font("Century", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Tipo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(lbSiguiente)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnBuscar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtDefensa, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(comboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtAtaque, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6))
+                        .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(BtnBuscar))
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(lbSiguiente)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lbSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSiguienteMouseClicked
+Inicio p=new Inicio();
+if(p.getAux().equals("zombies")){
+    Jugadores cat=new Jugadores();
+    p.setJugador("plantas");
+    cat.setVisible(true);
+    this.dispose();
+}
+else if(p.getAux().equals("plantas")){
+    Tablero tab=new Tablero();
+    tab.setVisible(true);
+    this.dispose();
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbSiguienteMouseClicked
+public void Mostrar(){
+final Class[] tiposColumnas = new Class[]{
+            JLabel.class,
+            java.lang.String.class,
+            java.lang.Integer.class,
+            java.lang.Integer.class,
+            java.lang.String.class,
+            JButton.class,
+            JButton.class
+        };
+
+Object datos[][]= agregarInfo();
+
+
+ jTablePlantas.setModel(new javax.swing.table.DefaultTableModel(
+                datos,
+                cabecera) {
+            // Esta variable nos permite conocer de antemano los tipos de datos de cada columna, dentro del TableModel
+            Class[] tipos = tiposColumnas;
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                // Este método es invocado por el CellRenderer para saber que dibujar en la celda,
+                // observen que estamos retornando la clase que definimos de antemano.
+                return tipos[columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Sobrescribimos este método para evitar que la columna que contiene los botones sea editada.
+                return !(this.getColumnClass(column).equals(JButton.class));
+            }
+        });
+
+
+        // El objetivo de la siguiente línea es indicar el CellRenderer que será utilizado para dibujar el botón
+        jTablePlantas.setDefaultRenderer(JButton.class, new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object objeto, boolean estaSeleccionado, boolean tieneElFoco, int fila, int columna) {
+
+                return (Component) objeto;
+            }
+        });
+          jTablePlantas.setDefaultRenderer(JLabel.class, new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object objeto, boolean estaSeleccionado, boolean tieneElFoco, int fila, int columna) {
+
+                return (Component) objeto;
+            }
+        });
+        
+        jTablePlantas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = jTablePlantas.rowAtPoint(e.getPoint());
+                int columna = jTablePlantas.columnAtPoint(e.getPoint());
+                if(fila!=-1){
+                    if (jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)&&jTablePlantas.getModel().getColumnName(columna).equals("Eliminar")&&columna==5) {
+
+                    EliminarZombie(jTablePlantas.getModel().getValueAt(fila,1).toString());
+                    }
+                    else if(jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)&&jTablePlantas.getModel().getColumnName(columna).equals("Modificar")){
+                        ModificarZombie(jTablePlantas.getModel().getValueAt(fila,1).toString());
+                        Nmod=fila;
+                    }
+
+                }
+                
+
+            }
+        });
+
+        
+}
+public void ModificarZombie(String nombre){
+    btnModificar.setVisible(true);
+    btnAgregar.setVisible(false);
+    zombie p=ListaZombies.buscarZombie(nombre);
+    txtImagen.setText(p.getRuta());
+    txtNombre.setText(p.getNombre());
+    txtAtaque.setText(""+p.getAtaque());
+    txtDefensa.setText(""+p.getDefensa());
+    comboTipo.setSelectedItem(p.getTipo());
+    btnAgregar.setVisible(false);
+   
+    
+}
+public Object[][] agregarInfo(){
+    int n=ListaZombies.ContadorLista();
+    Object datos[][]=new Object[n][7];
+    for(int i=0;i<ListaZombies.ContadorLista();i++){
+        zombie p=new zombie();
+        p=(zombie)ListaZombies.GetNodo(i).datos;
+        datos[i][0]=p.getImagen();
+        datos[i][1]=p.getNombre();
+        datos[i][2]=p.getAtaque();
+        datos[i][3]=p.getDefensa();
+        datos[i][4]=p.getTipo();
+        datos[i][5]=p.getEliminar();
+        datos[i][6]=p.getModificar();
+        
+    }
+    return datos;
+}
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        zombie aux=(zombie)ListaZombies.GetNodo(Nmod).datos;
+        aux.setImagen(txtImagen.getText());
+        aux.setNombre(txtNombre.getText());
+        aux.setAtaque(Integer.parseInt(txtAtaque.getText()));
+        aux.setDefensa(Integer.parseInt(txtDefensa.getText()));
+        aux.setTipo(comboTipo.getSelectedItem().toString());
+        Mostrar();
+        btnModificar.setVisible(false);
+        btnAgregar.setVisible(true);
+        txtImagen.setText("");
+        txtNombre.setText("");
+        txtAtaque.setText("");
+        txtDefensa.setText("");
+
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        String imagen=txtImagen.getText();
+        String nombre=txtNombre.getText();
+        int ataque= Integer.parseInt(txtAtaque.getText());
+        int defensa= Integer.parseInt(txtDefensa.getText());
+        String tipo=comboTipo.getSelectedItem().toString();
+        agregar(imagen, nombre, ataque, defensa, tipo);
+        txtImagen.setText("");
+        txtNombre.setText("");
+        txtAtaque.setText("");
+        txtDefensa.setText("");
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+public void agregar(String imagen,String nombre,int ataque,int defensa,String tipo){
+      zombie p=new zombie();
+      p.setImagen(imagen);
+      p.setNombre(nombre);
+      p.setAtaque(ataque);
+      p.setDefensa(defensa);
+      p.setTipo(tipo);
+      try{
+      ListaZombies.agregarAlFinal(p);
+      Mostrar();
+      }catch(Exception e){
+      }
+}
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        JFileChooser p=new JFileChooser();
+        p.showOpenDialog(p);
+        txtImagen.setText(p.getSelectedFile().getPath());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+ setImage("/imagenes/plants-v-zombies-screenshot-4.jpg");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -77,5 +439,22 @@ public class catalogoZombies extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBuscar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox comboTipo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTablePlantas;
+    private javax.swing.JLabel lbSiguiente;
+    private javax.swing.JTextField txtAtaque;
+    private javax.swing.JTextField txtDefensa;
+    private javax.swing.JTextField txtImagen;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

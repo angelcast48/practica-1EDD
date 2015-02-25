@@ -14,6 +14,7 @@ public class zombie {
     private int ataque;
     private int defensa;
     private String tipo;
+    private String Ruta;
 public zombie() {
     Eliminar=new JButton();
     Modificar=new JButton();
@@ -27,6 +28,7 @@ public zombie() {
 public void setImagen(String img){
         ImageIcon foto = new ImageIcon(img);
         imagen.setSize(100,100);
+        setRuta(img);
          ImageIcon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.getWidth(),imagen.getHeight(), Image.SCALE_DEFAULT));
          imagen.setIcon(icono);  
          imagen.setIcon(icono);
@@ -105,5 +107,19 @@ public void setImagen(String img){
      */
     public JLabel getImagen() {
         return imagen;
+    }
+
+    /**
+     * @return the Ruta
+     */
+    public String getRuta() {
+        return Ruta;
+    }
+
+    /**
+     * @param Ruta the Ruta to set
+     */
+    public void setRuta(String Ruta) {
+        this.Ruta = Ruta;
     }
 }

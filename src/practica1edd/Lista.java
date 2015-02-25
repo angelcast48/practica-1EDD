@@ -85,86 +85,56 @@ if(nombre.equalsIgnoreCase(planta.getNombre())){
 }
 }
 }
-//    public Equipo buscarEquipo(String nombre) {
-//        Nodo nodo = primerNodo;
-//        Equipo equipoBuscado = null;
-//        Equipo equipo;
-//        while (nodo != null) {
-//            equipo = (Equipo) nodo.datos;
-//            if (nombre.equalsIgnoreCase(equipo.getNombre())) {
-//                equipoBuscado = equipo;
-//                break;
-//            }
-//            nodo = nodo.siguienteNodo;
-//        }
-//
-//        return equipoBuscado;
-//    }
-//
-//    public Torneo buscarTorneo(String nombre) {
-//        Nodo nodo = primerNodo;
-//        Torneo torneoBuscado = null;
-//        Torneo torneo;
-//        while (nodo != null) {
-//            torneo = (Torneo) nodo.datos;
-//            if (nombre.equalsIgnoreCase(torneo.getNombre())) {
-//                torneoBuscado = torneo;
-//                break;
-//            }
-//            nodo = nodo.siguienteNodo;
-//        }
-//
-//        return torneoBuscado;
-//    }
-//
-//    public Torneo buscarTorneoCSV(String nombre) {
-//        Nodo nodo = primerNodo;
-//        Torneo torneoBuscado = null;
-//        Torneo torneo;
-//        while (nodo != null) {
-//            torneo = (Torneo) nodo.datos;
-//            if (nombre.equalsIgnoreCase(torneo.getNombre())) {
-//                torneoBuscado = torneo;
-//                break;
-//            }
-//            nodo = nodo.siguienteNodo;
-//        }
-//
-//        return torneoBuscado;
-//    }
-//
-//    public Estadio buscarEstadio(String nombre) {
-//        Nodo nodo = primerNodo;
-//        Estadio estadioBuscado = null;
-//        Estadio estadio;
-//        while (nodo != null) {
-//            estadio = (Estadio) nodo.datos;
-//            if (nombre.equalsIgnoreCase(estadio.getNombre())) {
-//                estadioBuscado = estadio;
-//                break;
-//            }
-//            nodo = nodo.siguienteNodo;
-//        }
-//
-//        return estadioBuscado;
-//    }
-//
-//    public Jugador buscarJugador(String nombre) {
-//        Nodo nodo = primerNodo;
-//        Jugador jugadorBuscado = null;
-//        Jugador jugador;
-//        while (nodo != null) {
-//            jugador = (Jugador) nodo.datos;
-//            if (nombre.equals(jugador.getNombre())) {
-//                jugadorBuscado = jugador;
-//                break;
-//            }
-//            nodo = nodo.siguienteNodo;
-//        }
-//
-//        return jugadorBuscado;
-//    }
-//
+public void eliminarZombie(String nombre){
+Nodo nodo=primerNodo;
+zombie zombie=(zombie)nodo.datos;
+if(!listaVacia()){
+if(nombre.equalsIgnoreCase(zombie.getNombre())){
+    primerNodo=primerNodo.getSiguienteNodo();
+}
+    else{
+                Nodo anterior = primerNodo; 
+                Nodo auxiliar;
+                auxiliar = primerNodo.getSiguienteNodo();
+                if(auxiliar!=ultimoNodo){
+                while (auxiliar != null) {
+                    zombie aux=(zombie)auxiliar.datos;
+                    if (nombre.equalsIgnoreCase(aux.getNombre())) {
+                        if(auxiliar!=null){
+                            anterior.setSiguienteNodo(auxiliar.getSiguienteNodo());
+                            auxiliar = null;
+                            break;
+                        }
+                        else{
+                            anterior.setSiguienteNodo(auxiliar.getSiguienteNodo());
+                            ultimoNodo=anterior;
+                            auxiliar = null;
+                            break;
+                        }
+                        
+                    }
+                    anterior = auxiliar;
+                    auxiliar = auxiliar.getSiguienteNodo();
+                }
+                }
+                else{
+                    while (auxiliar != null) {
+                    zombie aux=(zombie)auxiliar.datos;
+                    if (nombre.equalsIgnoreCase(aux.getNombre())) {
+                        primerNodo.setSiguienteNodo(auxiliar.getSiguienteNodo());
+                        auxiliar = null;
+                        ultimoNodo=primerNodo;
+                        break;
+                    }
+                    anterior = auxiliar;
+                    auxiliar = auxiliar.getSiguienteNodo();
+                }
+
+                }
+}
+}
+}
+
     public planta buscarPlanta(String nombre) {
         Nodo nodo = primerNodo;
         planta PlantaBuscada = null;
@@ -180,7 +150,36 @@ if(nombre.equalsIgnoreCase(planta.getNombre())){
 
         return PlantaBuscada;
     }
+    public zombie buscarZombie(String nombre) {
+        Nodo nodo = primerNodo;
+        zombie ZombieBuscada = null;
+        zombie zombie;
+        while (nodo != null) {
+            zombie = (zombie) nodo.datos;
+            if (zombie.getNombre().equals(nombre)) {
+                 ZombieBuscada= zombie;
+                break;
+            }
+            nodo = nodo.siguienteNodo;
+        }
 
+        return ZombieBuscada;
+    }
+    public Jugador buscarJugador(String tipo) {
+        Nodo nodo = primerNodo;
+        Jugador JugadorBuscado = null;
+        Jugador jugador;
+        while (nodo != null) {
+            jugador = (Jugador) nodo.datos;
+            if (jugador.getTipo().equals(tipo)) {
+                 JugadorBuscado= jugador;
+                break;
+            }
+            nodo = nodo.siguienteNodo;
+        }
+
+        return JugadorBuscado;
+    }    
     boolean listaVacia() {
         return primerNodo == null;
     }

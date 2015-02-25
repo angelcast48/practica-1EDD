@@ -23,7 +23,7 @@ import javax.swing.table.TableCellRenderer;
  * @author Ange
  */
 public class Plantas extends img {
-Lista ListaPlantas=new Lista();
+static Lista ListaPlantas=new Lista();
 DefaultTableModel md;
 Object data[][]={};
 static int Nmod;//numero de planta a modificar
@@ -35,6 +35,7 @@ String info="";
         md=new DefaultTableModel(data,cabecera);
         jTablePlantas.setModel(md);
         jTablePlantas.setRowHeight(100);
+        lbSiguiente.setSize(30, 30);
         btnModificar.setVisible(false);
       
         
@@ -43,7 +44,9 @@ public void EliminarPlanta(String nombre){
 ListaPlantas.eliminarPlanta(nombre);
 Mostrar();
 }
-
+public Lista getListaPlantas(){
+    return ListaPlantas;
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,6 +67,7 @@ Mostrar();
         jLabel6 = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox();
         btnModificar = new javax.swing.JButton();
+        lbSiguiente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 51));
@@ -125,7 +129,6 @@ Mostrar();
         jLabel3.setText("Ataque:");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Planta");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disparo", "Directo" }));
@@ -138,6 +141,13 @@ Mostrar();
             }
         });
 
+        lbSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/flecha.png"))); // NOI18N
+        lbSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbSiguienteMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,49 +156,50 @@ Mostrar();
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(lbSiguiente)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(BtnBuscar))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtDefensa, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(comboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtAtaque, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnModificar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                        .addGap(7, 7, 7)
-                                        .addComponent(BtnBuscar)))
-                                .addGap(27, 27, 27))
+                                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDefensa, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 135, Short.MAX_VALUE)
-                                    .addComponent(txtAtaque, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel6))))
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel6)))
+                        .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -214,8 +225,10 @@ Mostrar();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(47, 47, 47))
+                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(lbSiguiente)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -264,6 +277,22 @@ btnAgregar.setVisible(true);
         txtDefensa.setText("");
         
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void lbSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSiguienteMouseClicked
+Inicio p=new Inicio();
+if(p.getAux().equals("plantas")){
+    Jugadores cat=new Jugadores();
+    p.setJugador("zombies");
+    cat.setVisible(true);
+    this.dispose();
+}
+else if(p.getAux().equals("zombies")){
+    Tablero tab=new Tablero();
+    tab.setVisible(true);
+    this.dispose();
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbSiguienteMouseClicked
 public void Mostrar(){
 final Class[] tiposColumnas = new Class[]{
             JLabel.class,
@@ -314,29 +343,24 @@ Object datos[][]= agregarInfo();
                 return (Component) objeto;
             }
         });
-
+        
         jTablePlantas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int fila = jTablePlantas.rowAtPoint(e.getPoint());
                 int columna = jTablePlantas.columnAtPoint(e.getPoint());
-                if (jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)&&jTablePlantas.getModel().getColumnName(columna).equals("Eliminar")&&columna==5) {
+                if(fila!=-1){
+                    if (jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)&&jTablePlantas.getModel().getColumnName(columna).equals("Eliminar")&&columna==5) {
 
                     EliminarPlanta(jTablePlantas.getModel().getValueAt(fila,1).toString());
-                    
-                    
+                    }
+                    else if(jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)&&jTablePlantas.getModel().getColumnName(columna).equals("Modificar")){
+                        ModificarPlanta(jTablePlantas.getModel().getValueAt(fila,1).toString());
+                        Nmod=fila;
+                    }
+
                 }
-                else if(jTablePlantas.getModel().getColumnClass(columna).equals(JButton.class)&&jTablePlantas.getModel().getColumnName(columna).equals("Modificar")&&columna==6){
-                    ModificarPlanta(jTablePlantas.getModel().getValueAt(fila,1).toString());
-                    Nmod=fila;
-                    
-                }
-//                if(contador==0){
-//                    contador++;
-//                }
-//                else{
-//                    contador=0;
-//                }
+                
             }
         });
 
@@ -429,6 +453,7 @@ public void agregar(String imagen,String nombre,int ataque,int defensa,String ti
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablePlantas;
+    private javax.swing.JLabel lbSiguiente;
     private javax.swing.JTextField txtAtaque;
     private javax.swing.JTextField txtDefensa;
     private javax.swing.JTextField txtImagen;

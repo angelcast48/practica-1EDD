@@ -2,6 +2,7 @@ package practica1edd;
 public class Jugador {
 private String nombre;
 private Lista campos=new Lista();
+private String tipo;
 private int Cantidad;
     /**
      * @return the nombre
@@ -43,6 +44,20 @@ private int Cantidad;
      */
     public void setCantidad(int Cantidad) {
         this.Cantidad = Cantidad;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
 }
