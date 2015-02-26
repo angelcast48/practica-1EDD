@@ -21,7 +21,7 @@ import static practica1edd.Plantas.Nmod;
  * @author Ange
  */
 public class catalogoZombies extends img {
-Lista ListaZombies=new Lista();
+static Lista ListaZombies=new Lista();
 DefaultTableModel md;
 Object data[][]={};
 static int Nmod;//numero de zombie a modificar
@@ -40,6 +40,9 @@ String info="";
 public void EliminarZombie(String nombre){
 ListaZombies.eliminarZombie(nombre);
 Mostrar();
+}
+public Lista getListaZombies(){
+    return ListaZombies;
 }
 
     /**
@@ -238,7 +241,7 @@ if(p.getAux().equals("zombies")){
     this.dispose();
 }
 else if(p.getAux().equals("plantas")){
-    Tablero tab=new Tablero();
+    Matriz tab=new Matriz();
     tab.setVisible(true);
     this.dispose();
 }

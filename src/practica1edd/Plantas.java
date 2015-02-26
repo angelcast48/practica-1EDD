@@ -287,7 +287,7 @@ if(p.getAux().equals("plantas")){
     this.dispose();
 }
 else if(p.getAux().equals("zombies")){
-    Tablero tab=new Tablero();
+    Matriz tab=new Matriz();
     tab.setVisible(true);
     this.dispose();
 }
